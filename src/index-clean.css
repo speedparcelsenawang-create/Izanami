@@ -1,0 +1,1079 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  --text-color: #555555;
+  overflow-y: scroll; /* Prevent layout shift when modal opens */
+  opacity: 0;
+  animation: pageFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Root container fade in */
+#root {
+  animation: rootFadeIn 0.6s ease-out;
+}
+
+@keyframes rootFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode */
+body.dark {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+  --text-color: #e5e5e5;
+}
+
+/* Smooth transitions - excluding transform to prevent glitches */
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.card {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: cardFadeIn 0.7s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Loading Spinner Animation */
+@keyframes spinnerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pi-spin {
+  animation: spinnerRotate 1s linear infinite !important;
+}
+
+.pi-spinner {
+  animation: spinnerRotate 1s linear infinite !important;
+}
+
+/* Image Loading Overlay */
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* DataTable Styling */
+.p-datatable {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  border: 0 !important;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  animation: tableFadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes tableFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.p-datatable:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+body.dark .p-datatable {
+  background-color: #0f0f0f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 0 !important;
+}
+
+body.dark .p-datatable:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Prevent table from jumping when dialog opens */
+body.p-overflow-hidden {
+  padding-right: 0 !important;
+}
+
+.p-datatable .p-datatable-wrapper {
+  border: 0 !important;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.p-datatable table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Global border removal for all table elements */
+.p-datatable,
+.p-datatable * {
+  border-collapse: separate !important;
+}
+
+.p-datatable table,
+.p-datatable table *,
+.p-datatable thead,
+.p-datatable thead *,
+.p-datatable tbody,
+.p-datatable tbody *,
+.p-datatable tr,
+.p-datatable th,
+.p-datatable td {
+  box-sizing: border-box;
+}
+
+/* Table Header */
+.p-datatable .p-datatable-thead > tr > th {
+  background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+  color: #000000;
+  text-align: center !important;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 1rem;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.p-datatable .p-datatable-thead > tr > th:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+.p-datatable .p-datatable-thead > tr > th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+body.dark .p-datatable .p-datatable-thead > tr > th {
+  background: linear-gradient(180deg, #2f2f2f 0%, #2a2a2a 100%);
+  color: #ffffff;
+}
+
+/* Table Body */
+.p-datatable .p-datatable-tbody > tr {
+  border: 0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  animation: rowFadeIn 0.5s ease-out backwards;
+}
+
+@keyframes rowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger row animations */
+.p-datatable .p-datatable-tbody > tr:nth-child(1) { animation-delay: 0.05s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(2) { animation-delay: 0.1s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(3) { animation-delay: 0.15s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(4) { animation-delay: 0.2s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(5) { animation-delay: 0.25s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(6) { animation-delay: 0.3s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(7) { animation-delay: 0.35s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(8) { animation-delay: 0.4s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(9) { animation-delay: 0.45s; }
+.p-datatable .p-datatable-tbody > tr:nth-child(10) { animation-delay: 0.5s; }
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center !important;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.p-datatable .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none !important;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr > td {
+  background-color: #0f0f0f;
+  color: #e5e5e5;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr:last-child > td {
+  border: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #f8fafc;
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #1a1a1a;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover > td {
+  background-color: #f8fafc;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr:hover > td {
+  background-color: #1a1a1a;
+}
+
+/* Disabled row styling */
+.p-datatable .p-datatable-tbody > tr.row-disabled {
+  opacity: 0.5;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr.row-disabled {
+  background-color: #0a0a0a;
+  color: #4a4a4a;
+}
+
+/* Pinned Row Styling - Only affects position, no background color */
+.p-datatable .p-datatable-tbody > tr.pinned-row {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.p-datatable .p-datatable-tbody > tr.pinned-row > td {
+  font-weight: 600 !important;
+}
+
+/* New/Modified Row Highlight - Green Text Only, No Background */
+.p-datatable .p-datatable-tbody > tr.new-row-light {
+  animation: highlightFadeIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.p-datatable .p-datatable-tbody > tr.new-row-light > td {
+  color: #16a34a !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+.p-datatable .p-datatable-tbody > tr.modified-row-light {
+  background-color: #fefce8 !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.p-datatable .p-datatable-tbody > tr.modified-row-light > td {
+  background-color: #fefce8 !important;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr.new-row-dark {
+  animation: highlightFadeInDark 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr.new-row-dark > td {
+  color: #22c55e !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr.modified-row-dark {
+  background-color: #78350f !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .p-datatable .p-datatable-tbody > tr.modified-row-dark > td {
+  background-color: #78350f !important;
+}
+
+@keyframes highlightFadeIn {
+  0% {
+    transform: scale(1.02) translateY(-2px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.015) translateY(-1px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes highlightFadeInDark {
+  0% {
+    transform: scale(1.02) translateY(-2px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.015) translateY(-1px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    opacity: 1;
+  }
+}
+
+/* Dialog Styling */
+.p-dialog {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: dialogFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Dialog Fade In Animation */
+@keyframes dialogFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(-15px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) translateZ(0);
+  }
+}
+
+/* Dialog Mask (backdrop) Fade */
+.p-dialog-mask {
+  animation: maskFadeIn 0.25s ease-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+body.dark .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+@keyframes maskFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body.dark .p-dialog {
+  background-color: #1e293b;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: dialogFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Dialog transition for smooth closing */
+.p-dialog {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.p-dialog-mask {
+  transition: opacity 0.3s ease-out;
+}
+
+.p-dialog .p-dialog-header {
+  background: linear-gradient(180deg, #eff6ff 0%, #e5e7eb 100%);
+  color: #111827;
+  padding: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.dark .p-dialog .p-dialog-header {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #f1f5f9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.p-dialog .p-dialog-content {
+  background-color: #f3f4f6;
+  color: #111827;
+  padding: 1.5rem;
+}
+
+body.dark .p-dialog .p-dialog-content {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+
+/* Ensure DataTable inside Dialog has no borders */
+.p-dialog .p-datatable,
+.p-dialog .p-datatable *,
+.p-dialog .p-datatable table,
+.p-dialog .p-datatable thead th,
+.p-dialog .p-datatable tbody td {
+  border: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Dialog Content Transitions */
+.p-dialog .p-dialog-content {
+  animation: contentFadeIn 0.2s ease-out backwards;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.p-dialog .p-dialog-footer {
+  background-color: #e5e7eb;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #9ca3af;
+}
+
+body.dark .p-dialog .p-dialog-footer {
+  background-color: #0f172a;
+  border-top: 1px solid #334155;
+}
+
+/* Dialog Header Icons */
+.p-dialog .p-dialog-header-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  color: #64748b;
+}
+
+.p-dialog .p-dialog-header-icon:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+body.dark .p-dialog .p-dialog-header-icon {
+  color: #e5e4e2;
+  background-color: rgba(229, 228, 226, 0.1);
+}
+
+body.dark .p-dialog .p-dialog-header-icon:hover {
+  color: #ffffff;
+  background-color: rgba(229, 228, 226, 0.2);
+}
+
+/* Close button */
+.p-dialog .p-dialog-header-icon.p-dialog-header-close {
+  color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.p-dialog .p-dialog-header-icon.p-dialog-header-close:hover {
+  color: #ffffff !important;
+  background-color: #ef4444;
+}
+
+/* Button Styling */
+.p-button {
+  border-radius: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  will-change: transform;
+}
+
+.p-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.p-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Dropdown */
+.p-dropdown {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .p-dropdown {
+  background-color: #334155;
+  border: 1px solid #475569;
+  color: #f1f5f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.p-dropdown:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Dropdown Panel */
+.p-dropdown-panel {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+body.dark .p-dropdown-panel {
+  background-color: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  color: #111827 !important;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  color: #f1f5f9 !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background-color: #f0f9ff !important;
+  transform: translateX(4px);
+}
+
+body.dark .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background-color: #334155 !important;
+  transform: translateX(4px);
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Input */
+.p-inputtext {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  border-radius: 10px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .p-inputtext {
+  background-color: #334155;
+  border: 1px solid #475569;
+  color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dialog Input Text - White Color */
+body.dark .p-dialog .p-inputtext {
+  color: #ffffff;
+}
+
+.p-inputtext:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.p-inputtext:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+body.dark .p-inputtext:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25), 0 4px 12px rgba(0, 0, 0, 0.4);
+  background-color: #3b4557;
+}
+
+/* Input with Icon */
+.p-input-icon-left {
+  position: relative;
+  display: inline-block;
+}
+
+.p-input-icon-left > i {
+  position: absolute;
+  left: 0.75rem;
+  top: 55%;
+  transform: translateY(-50%);
+  color: #64748b;
+  z-index: 1;
+  pointer-events: none;
+}
+
+body.dark .p-input-icon-left > i {
+  color: #94a3b8;
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2.5rem;
+}
+
+.p-input-icon-right {
+  position: relative;
+  display: inline-block;
+}
+
+.p-input-icon-right > i {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  z-index: 1;
+  pointer-events: none;
+}
+
+body.dark .p-input-icon-right > i {
+  color: #94a3b8;
+}
+
+.p-input-icon-right > .p-inputtext {
+  padding-right: 2.5rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+body.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 8px;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  background: #404040;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: #505050;
+}
+
+/* Menu Styling */
+.p-menu {
+  background-color: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem !important;
+}
+
+body.dark .p-menu {
+  background-color: #1a1a1a !important;
+  border: 1px solid #404040 !important;
+}
+
+.p-menu .p-menuitem-link {
+  color: #1e293b !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+}
+
+body.dark .p-menu .p-menuitem-link {
+  color: #ffffff !important;
+}
+
+.p-menu .p-menuitem-link:hover {
+  background-color: #f3f4f6 !important;
+}
+
+body.dark .p-menu .p-menuitem-link:hover {
+  background-color: #2a2a2a !important;
+}
+
+/* Menu colored items */
+.menu-save-item .p-menuitem-link {
+  color: #10b981 !important;
+}
+
+.menu-cancel-item .p-menuitem-link,
+.menu-danger-item .p-menuitem-link {
+  color: #ef4444 !important;
+}
+
+/* Dialog Mask */
+.p-dialog-mask {
+  background-color: rgba(10, 25, 41, 0.7) !important;
+  backdrop-filter: blur(2px);
+}
+
+body.dark .p-dialog-mask {
+  background-color: rgba(10, 25, 41, 0.8) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* LightGallery Styling */
+.lg-outer {
+  z-index: 9999 !important;
+}
+
+.lg-backdrop {
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(20px);
+  z-index: 9998 !important;
+}
+
+.lg-toolbar {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(16px);
+  padding: 10px 20px;
+  z-index: 10000 !important;
+}
+
+.lg-toolbar .lg-icon {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.lg-toolbar .lg-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff !important;
+}
+
+.lg-outer .lg-thumb-outer {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(15px);
+}
+
+.lg-outer .lg-thumb-item {
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.lg-outer .lg-thumb-item:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.lg-outer .lg-thumb-item.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.lg-outer .lg-image {
+  max-width: 95vw !important;
+  max-height: 95vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+/* Duplicate validation styling */
+.p-inputtext.p-invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25) !important;
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Row Expansion Animations */
+.p-datatable .p-datatable-row-expansion {
+  animation: rowExpand 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes rowExpand {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.7) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+.p-datatable .p-row-toggler {
+  transition: all 0.3s ease !important;
+}
+
+.p-datatable .p-row-toggler:hover {
+  transform: scale(1.15);
+}
+
+.p-datatable .p-row-toggler-icon {
+  transition: transform 0.4s ease !important;
+}
+
+.p-datatable .p-row-toggler[aria-expanded="true"] .p-row-toggler-icon {
+  transform: rotate(90deg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem;
+  }
+  
+  .p-datatable .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-tbody > tr > td {
+    font-size: 11px;
+    padding: 0.5rem;
+  }
+}
+
+/* Animated Modal Styles */
+.modal-overlay {
+  backdrop-filter: blur(10px);
+}
+
+/* Utility classes for modal */
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotateX(40deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8) rotateX(10deg);
+  }
+}
+
+.modal-enter {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-exit {
+  animation: modalFadeOut 0.3s ease-in;
+}
+
+/* Slide down animation for update banner */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ========================================
+   Map Component Styling & Dark Mode
+   ======================================== */
+
+/* Mini map container dark mode */
+body.dark .mini-map-container {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Map info boxes */
+.map-info-box {
+  transition: all 0.3s ease;
+}
+
+body.dark .map-info-multiple {
+  background-color: rgba(6, 182, 212, 0.2) !important;
+  color: #67e8f9 !important;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+body.dark .map-info-warning {
+  background-color: rgba(251, 191, 36, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Fullscreen map badge dark mode */
+body.dark .fullscreen-map-badge {
+  background-color: rgba(30, 30, 30, 0.95) !important;
+  color: #e5e5e5 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Leaflet controls dark mode */
+body.dark .leaflet-control-layers,
+body.dark .leaflet-control-zoom {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark .leaflet-control-layers-toggle {
+  background-color: #2a2a2a !important;
+}
+
+body.dark .leaflet-control-zoom a {
+  background-color: #1e1e1e !important;
+  color: #e5e5e5 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark .leaflet-control-zoom a:hover {
+  background-color: #2a2a2a !important;
+}
+
+body.dark .leaflet-control-layers-list {
+  background-color: #1e1e1e !important;
+  color: #e5e5e5 !important;
+}
+
+body.dark .leaflet-popup-content-wrapper {
+  background-color: #1e1e1e !important;
+  color: #e5e5e5 !important;
+}
+
+body.dark .leaflet-popup-tip {
+  background-color: #1e1e1e !important;
+}
+
+/* Fullscreen dialog dark mode */
+body.dark .fullscreen-map-dialog .p-dialog-header {
+  background-color: #1a1a1a !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark .fullscreen-map-dialog .p-dialog-content {
+  background-color: #0f0f0f !important;
+}

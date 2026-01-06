@@ -1,0 +1,44 @@
+{
+  "name": "table-grod",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "React table component with PrimeReact",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_OPTIONS='--no-deprecation' vite",
+    "build": "NODE_OPTIONS='--no-deprecation' vite build",
+    "preview": "NODE_OPTIONS='--no-deprecation' vite preview",
+    "clean": "rm -rf dist node_modules/.vite",
+    "clean:all": "rm -rf dist node_modules/.vite node_modules && npm install",
+    "rebuild": "npm run clean && npm run build",
+    "setup-db": "node setup-db.js"
+  },
+  "keywords": [
+    "react",
+    "table",
+    "primereact"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.0",
+    "dotenv": "^17.2.3",
+    "framer-motion": "^12.23.26",
+    "leaflet": "^1.9.4",
+    "lg-thumbnail": "^1.2.1",
+    "lg-zoom": "^1.3.0",
+    "lightgallery": "^2.9.0",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.5.1",
+    "qr-scanner": "^1.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.0",
+    "vite-plugin-pwa": "^0.19.8",
+    "workbox-window": "^7.4.0"
+  }
+}
